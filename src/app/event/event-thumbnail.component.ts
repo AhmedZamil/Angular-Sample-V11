@@ -5,6 +5,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
     selector:'event-thumbnail',
     templateUrl:'./event-thumbnail.component.html',
     styles:[`
+    .green { color:#003300 !important}
+    .bold {font-weight:bold;}
     .thumbnail { min-height: 210px!important;}
     .pad-left { margin-left:10px; }
     .well div {color: #bbb}
