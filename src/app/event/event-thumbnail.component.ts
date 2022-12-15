@@ -6,6 +6,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
     templateUrl:'./event-thumbnail.component.html',
     styles:[`
     .green { color:#003300 !important}
+    .red {color: red !important}
     .bold {font-weight:bold;}
     .thumbnail { min-height: 210px!important;}
     .pad-left { margin-left:10px; }
@@ -36,6 +37,15 @@ export class EventThumbnailComponent implements OnInit{
 
     getStartTimeClass(){
         const isEarlyStart = this.event && this.event.time == '8:00 am';
-        return { green:isEarlyStart, bold:isEarlyStart}
+        const isLateStart = this.event && this.event.time == '10:00 am';
+        if(isEarlyStart)
+        {
+          return 'green bold'
+        }
+        if(isLateStart)
+        {
+            return ' red bold'
+        }
+        return ' '
     }
 }
