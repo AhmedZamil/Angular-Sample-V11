@@ -5,17 +5,18 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { EventDetailsComponent } from './event/event-details.component';
-import { EventListComponent } from './event/event-list.component';
+import { EventsListComponent } from './event/event-list.component';
 import { EventThumbnailComponent } from './event/event-thumbnail.component';
 import { NavbarComponent } from './nav/navbar.component';
 import { appRoutes } from './routes';
 import { CreateEventComponent } from './event/create-event.component';
 import { Error404Component } from './errors/404.component';
+import { EventListResolver } from './services/event-list-resolver.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    EventListComponent,
+    EventsListComponent,
     EventThumbnailComponent,
     EventDetailsComponent,
     NavbarComponent,
@@ -43,5 +44,4 @@ export function checkDirtyState(component:CreateEventComponent){
   {
     return true;
   }
-  return false;
 }

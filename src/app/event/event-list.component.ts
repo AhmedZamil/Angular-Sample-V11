@@ -1,5 +1,6 @@
 import { toBase64String } from '@angular/compiler/src/output/source_map';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from '../common/toaster.service';
 import { EventService } from '../services/event.service';
 
@@ -7,17 +8,23 @@ import { EventService } from '../services/event.service';
   templateUrl: './event-list.component.html',
   styleUrls: ['./event-list.component.css']
 })
-export class EventListComponent implements OnInit {
+export class EventsListComponent implements OnInit {
 
   public title:string ="Angular Event Coming";
 
-  public events:any;
+  public events:any[];
 
 
-  constructor(private eventService : EventService ,private toasterService : ToastrService) { }
+  constructor(
+    private eventService : EventService ,
+    private route:ActivatedRoute,
+    private toasterService : ToastrService) { }
 
   ngOnInit(): void {
-     this.eventService.getEvents().subscribe(events=> {this.events = events});
+     
+    this.events = this.route.snapshot.data['events'];
+   
+     //this.eventService.getEvents().subscribe(events=> {this.events = events});
   }
 
   handleEventClicked(data):void{
