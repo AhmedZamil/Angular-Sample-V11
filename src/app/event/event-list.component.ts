@@ -11,13 +11,13 @@ export class EventListComponent implements OnInit {
 
   public title:string ="Angular Event Coming";
 
-  public events:any [];
+  public events:any;
 
 
   constructor(private eventService : EventService ,private toasterService : ToastrService) { }
 
   ngOnInit(): void {
-     this.events = this.eventService.getEvents();
+     this.eventService.getEvents().subscribe(events=> {this.events = events});
   }
 
   handleEventClicked(data):void{
