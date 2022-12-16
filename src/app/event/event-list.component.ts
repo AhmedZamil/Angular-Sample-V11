@@ -1,10 +1,9 @@
 import { toBase64String } from '@angular/compiler/src/output/source_map';
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from '../common/toaster.service';
 import { EventService } from '../services/event.service';
 
-declare let toastr
 @Component({
-  selector: 'event-list',
   templateUrl: './event-list.component.html',
   styleUrls: ['./event-list.component.css']
 })
@@ -15,7 +14,7 @@ export class EventListComponent implements OnInit {
   public events:any [];
 
 
-  constructor(private eventService : EventService) { }
+  constructor(private eventService : EventService ,private toasterService : ToastrService) { }
 
   ngOnInit(): void {
      this.events = this.eventService.getEvents();
@@ -26,7 +25,7 @@ export class EventListComponent implements OnInit {
 
   }
   handleThumbnailClick(eventName){
-   toastr.success(eventName);
+   this.toasterService.warning(eventName);
   }
 
 }

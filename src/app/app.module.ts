@@ -1,24 +1,47 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
+import { EventDetailsComponent } from './event/event-details.component';
 import { EventListComponent } from './event/event-list.component';
 import { EventThumbnailComponent } from './event/event-thumbnail.component';
 import { NavbarComponent } from './nav/navbar.component';
+import { appRoutes } from './routes';
+import { CreateEventComponent } from './event/create-event.component';
+import { Error404Component } from './errors/404.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EventListComponent,
     EventThumbnailComponent,
-    NavbarComponent
+    EventDetailsComponent,
+    NavbarComponent,
+    CreateEventComponent,
+    Error404Component
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [
+    { provide:"canDeactivateCreateEvent",useValue:checkDirtyState}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+export function checkDirtyState(component:CreateEventComponent){
+  if(component.isDirty)
+  {
+    return window.confirm("You have not saved event.Do you really want to go?")
+  }
+  else
+  {
+    return true;
+  }
+  return false;
+}
